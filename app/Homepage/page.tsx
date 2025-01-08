@@ -155,13 +155,9 @@ const CountriesPage = () => {
                       )}
                     </td>
                     <td className="border-b border-gray-500 px-4 py-2">
-                      <Link
-                        href={`/country/${country.name.common.toLowerCase()}`}
-                      >
-                        <p className="text-blue-500 hover:underline">
-                          {country.name.common}
-                        </p>
-                      </Link>
+                    <Link href={`/country/${encodeURIComponent(country.name.common.toLowerCase())}`}>
+  <p className="text-blue-500">{country.name.common}</p>
+</Link>
                     </td>
                     <td className="border-b border-gray-500 px-4 py-2">
                       {country.capital ? country.capital[0] : "N/A"}
