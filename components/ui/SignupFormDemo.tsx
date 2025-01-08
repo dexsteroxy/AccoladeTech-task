@@ -111,7 +111,7 @@ if (username1 && username2 && email && emailValidation(email) && password && pas
   return (
     <div className="max-w-md flex items-center justify-center h-screen flex-col w-full   mx-auto   shadow-input ">
       <div className="border-gray-500 rounded-none md:rounded-2xl border-2 p-4 md:p-6 bg-black">
-        <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
+        <h2 className="font-bold text-xl text-neutral-200">
           Welcome to Accolade Tech
         </h2>
 
