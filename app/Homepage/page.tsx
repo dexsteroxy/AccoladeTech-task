@@ -35,7 +35,7 @@ const CountriesPage = () => {
         const response = await axios.get("https://restcountries.com/v3.1/all");
         setCountries(response.data);
       } catch (e) {
-        setApiError("Unable to fetch countries. Please try again later.");
+        setApiError("The api is not available at the moment Please try again by refreshing your screen.");
       } finally {
         setLoading(false); // End loading
       }
