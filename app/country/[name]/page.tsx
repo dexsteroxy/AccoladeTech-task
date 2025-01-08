@@ -1,3 +1,4 @@
+import { FC } from "react";
 import React from "react";
 import axios from "axios";
 import Navbar from "@/components/Navbar";
@@ -12,7 +13,12 @@ interface Country {
   area: number;
 }
 
-const CountryDetailPage = async ({ params }: { params: { name: string } }) => {
+interface CountryDetailPageProps {
+  params: { name: string };  // Expect `name` to be a string
+}
+
+const CountryDetailPage: FC<CountryDetailPageProps> = async ({ params }) => {
+
   const { name } = params;
 
   try {
@@ -30,6 +36,7 @@ const CountryDetailPage = async ({ params }: { params: { name: string } }) => {
         </h1>
         <div className="border border-gray-500 p-6 rounded-md">
           <h1 className="text-3xl font-bold mb-4">{country.name.common}</h1>
+           
           <img
             src={country.flags.png}
             alt={`Flag of ${country.name.common}`}
@@ -69,3 +76,17 @@ const CountryDetailPage = async ({ params }: { params: { name: string } }) => {
 };
 
 export default CountryDetailPage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
