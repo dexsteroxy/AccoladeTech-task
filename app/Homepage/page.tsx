@@ -1,8 +1,3 @@
-
-
-
-
-
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -10,7 +5,6 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-
 
 interface Country {
   name: { common: string };
@@ -27,9 +21,9 @@ const CountriesPage = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCountries, setSelectedCountries] = useState<Country[]>([]);
-  const [loading, setLoading] = useState<boolean>(true); 
+  const [loading, setLoading] = useState<boolean>(true);
   const [apiError, setApiError] = useState<string | null>(null);
-  const [searchError, setSearchError] = useState<string | null>(null);// Add loading state
+  const [searchError, setSearchError] = useState<string | null>(null); // Add loading state
   const countriesPerPage = 16;
 
   // Fetch countries on component mount
@@ -41,7 +35,7 @@ const CountriesPage = () => {
         const response = await axios.get("https://restcountries.com/v3.1/all");
         setCountries(response.data);
       } catch (e) {
-        setApiError("Unable to fetch countries. Please try again later." );
+        setApiError("Unable to fetch countries. Please try again later.");
       } finally {
         setLoading(false); // End loading
       }
@@ -57,15 +51,14 @@ const CountriesPage = () => {
     )
     .sort((a, b) => a.name.common.localeCompare(b.name.common));
 
- // Handle search error when no countries match the query
- useEffect(() => {
-  if (!loading && searchQuery && filteredCountries.length === 0) {
-    setSearchError("No countries found matching your search.");
-  } else {
-    setSearchError(null); // Clear search error
-  }
-}, [searchQuery, filteredCountries, loading]);
-
+  // Handle search error when no countries match the query
+  useEffect(() => {
+    if (!loading && searchQuery && filteredCountries.length === 0) {
+      setSearchError("No countries found matching your search.");
+    } else {
+      setSearchError(null); // Clear search error
+    }
+  }, [searchQuery, filteredCountries, loading]);
 
   // Pagination logic
   const indexOfLastCountry = currentPage * countriesPerPage;
@@ -90,7 +83,7 @@ const CountriesPage = () => {
 
   return (
     <div className="p-4">
-     <Navbar />
+      <Navbar />
       <h1 className="text-2xl font-bold text-center mb-4">
         Countries of the World
       </h1>
@@ -118,11 +111,9 @@ const CountriesPage = () => {
             />
           </div>
 
-            {/* Search Error Message */}
-            {searchError && (
-            <div className="text-center text-red-500 mb-4">
-              {searchError}
-            </div>
+          {/* Search Error Message */}
+          {searchError && (
+            <div className="text-center text-red-500 mb-4">{searchError}</div>
           )}
 
           {/* Responsive Table */}
@@ -132,7 +123,9 @@ const CountriesPage = () => {
                 <tr>
                   <th className="border-b border-gray-500 px-4 py-2">Flag</th>
                   <th className="border-b border-gray-500 px-4 py-2">Name</th>
-                  <th className="border-b border-gray-500 px-4 py-2">Capital</th>
+                  <th className="border-b border-gray-500 px-4 py-2">
+                    Capital
+                  </th>
                   <th className="border-b border-gray-500 px-4 py-2">Region</th>
                   <th className="border-b border-gray-500 px-4 py-2">
                     Population
@@ -155,9 +148,13 @@ const CountriesPage = () => {
                       )}
                     </td>
                     <td className="border-b border-gray-500 px-4 py-2">
-                    <Link href={`/country/${encodeURIComponent(country.name.common.toLowerCase())}`}>
-  <p className="text-blue-500">{country.name.common}</p>
-</Link>
+                      <Link
+                        href={`/country/${encodeURIComponent(
+                          country.name.common.toLowerCase()
+                        )}`}
+                      >
+                        <p className="text-blue-500">{country.name.common}</p>
+                      </Link>
                     </td>
                     <td className="border-b border-gray-500 px-4 py-2">
                       {country.capital ? country.capital[0] : "N/A"}
@@ -214,14 +211,11 @@ const CountriesPage = () => {
                       {country.population.toLocaleString()}
                     </p>
                     <p>
-                      <strong>Area:</strong>{" "}
-                      {country.area.toLocaleString()} km²
+                      <strong>Area:</strong> {country.area.toLocaleString()} km²
                     </p>
                     <p>
                       <strong>GDP:</strong>{" "}
-                      {country.gdp
-                        ? `$${country.gdp.toLocaleString()}`
-                        : "N/A"}
+                      {country.gdp ? `$${country.gdp.toLocaleString()}` : "N/A"}
                     </p>
                   </div>
                 ))}
@@ -288,27 +282,11 @@ const CountriesPage = () => {
           </div>
         </>
       )}
-      <p className="  text-center text-gray-500 hover:text-white mt-4 cursor-pointer">Created by: Amadi Sixtus Tochukwu</p>
+      <p className="  text-center text-gray-500 hover:text-white mt-4 cursor-pointer">
+        Created by: Amadi Sixtus Tochukwu
+      </p>
     </div>
   );
 };
 
 export default CountriesPage;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
