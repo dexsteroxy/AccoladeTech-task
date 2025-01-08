@@ -12,12 +12,11 @@ interface Country {
 }
 
 interface CountryDetailPageProps {
-  params: { name: string }; // `params` must not be optional because it's provided dynamically by Next.js
+  params: Promise<{ name: string }>; // Reflect async nature of params
 }
 
 const CountryDetailPage: FC<CountryDetailPageProps> = async ({ params }) => {
-  // Await params destructuring for dynamic routes
-  const { name } = await params;
+  const { name } = await params; // Await the promise
 
   if (!name) {
     return (
